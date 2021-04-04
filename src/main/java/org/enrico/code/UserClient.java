@@ -1,4 +1,4 @@
-package org.enrico.code.controller;
+package org.enrico.code;
 
 import java.io.IOException;
 import java.net.URI;
@@ -8,9 +8,6 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.enrico.code.dto.PageDTO;
-import org.enrico.code.dto.UserDTO;
-import org.enrico.code.view.User;
 import com.google.gson.Gson;
 
 /*
@@ -25,6 +22,10 @@ public class UserClient {
 
   private static final String REST_URI_PAGE_1 = "https://reqres.in/api/users?page=1;";
 
+
+  /*
+   * Execute getFirstPage method
+   */
   public static void main(String args[]) {
     UserClient userClient = new UserClient();
     try {

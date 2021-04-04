@@ -1,4 +1,4 @@
-package usersFromWebservices;
+package org.enrico.code.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.IOException;
@@ -11,9 +11,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.enrico.code.controller.UserClient;
-import org.enrico.code.dto.PageDTO;
-import org.enrico.code.dto.UserDTO;
+import org.enrico.code.PageDTO;
+import org.enrico.code.UserClient;
+import org.enrico.code.UserDTO;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

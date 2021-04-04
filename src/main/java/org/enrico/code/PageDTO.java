@@ -1,4 +1,4 @@
-package org.enrico.code.dto;
+package org.enrico.code;
 
 import java.util.ArrayList;
 

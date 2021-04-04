@@ -1,4 +1,4 @@
-package org.enrico.code.dto;
+package org.enrico.code;
 
 import com.google.gson.annotations.SerializedName;
 

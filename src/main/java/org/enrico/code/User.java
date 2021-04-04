@@ -1,4 +1,4 @@
-package org.enrico.code.view;
+package org.enrico.code;
 
 public final class User {
 
