@@ -1,7 +1,5 @@
 package org.enrico.code.controller;
 
-import com.google.gson.Gson;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -10,10 +8,10 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.enrico.code.dto.PageDTO;
 import org.enrico.code.dto.UserDTO;
 import org.enrico.code.view.User;
+import com.google.gson.Gson;
 
 /*
  * 
@@ -24,60 +22,42 @@ import org.enrico.code.view.User;
  * 
  */
 public class UserClient {
-	
-    private static final String REST_URI_PAGE_1 = "https://reqres.in/api/users?page=1;";
-    //private static final String PATH = "data";
-    
+
+  private static final String REST_URI_PAGE_1 = "https://reqres.in/api/users?page=1;";
+
+  public static void main(String args[]) {
+    UserClient userClient = new UserClient();
+    try {
+      List<User> userList = userClient.getFirstPage();
+      userList.forEach(user -> System.out.println(user));
+    } catch (IOException | InterruptedException e) {
+      e.printStackTrace();
+    }
+
+  }
+
+  /*
+   * Call a webservice, get a List<UserDTO>, convert them in List<User> and send back to the caller
+   */
+  public List<User> getFirstPage() throws IOException, InterruptedException {
     HttpClient httpClient = HttpClient.newHttpClient();
     Gson gson = new Gson();
+    List<User> userList = new ArrayList<User>();
+    HttpRequest httpRequest =
+        HttpRequest.newBuilder().uri(URI.create(REST_URI_PAGE_1)).GET().build();
+    HttpResponse<String> response =
+        httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+    PageDTO page = gson.fromJson((String) response.body(), PageDTO.class);
+    List<UserDTO> userDTOList = page.getData();
+    userList = userDTOList.stream().map(this::convertToUser).collect(Collectors.toList());
+    return userList;
+  }
 
-    public static void main(String args[]){
-        UserClient userClient = new UserClient();
-        List<User> userList;
-		try {
-			userList = userClient.getFirstPage();
-	        for (User user : userList) {
-	            System.out.println(String.format("%1$s - %2$s", user.getFirstName(), user.getLastName()));
-	        }
-		} catch (IOException | InterruptedException e) {
-			e.printStackTrace();
-		}
-
-    }
-
-    public List<User> getFirstPage() throws IOException, InterruptedException{
-    	//Variable initialisation
-    	List<User> userList = new ArrayList<User>();
-        HttpRequest httpRequest = HttpRequest.newBuilder()
-                .uri(URI.create(REST_URI_PAGE_1))
-                .GET()
-                .build();
-        
-        //Call firstpage service
-        HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-        if(response != null) {
-        	//Conversion to DTO through Gson
-            PageDTO page = gson.fromJson((String)response.body(), PageDTO.class);
-            if(page != null) {
-	            List<UserDTO> userDTOList = page.getData();
-	            if(userDTOList !=null) {
-	            	//Mapping UserDTO to User
-		            userList = userDTOList.stream()
-		            					  .map(this::convertToUser)
-		            					  .collect(Collectors.toList());
-	            }
-            }
-        }
-        return userList;
-    }
-    
-    private User convertToUser(UserDTO userDTO) {
-    	User user = new User();
-    	if(userDTO != null) {
-	    	user.setFirstName(userDTO.getFirstName());
-	    	user.setLastName(userDTO.getLastName());
-    	}
-    	return user;
-    }
+  /*
+   * Converter UserDTO -> User
+   */
+  private User convertToUser(UserDTO userDTO) {
+    return new User(userDTO.getFirstName(), userDTO.getLastName());
+  }
 
 }

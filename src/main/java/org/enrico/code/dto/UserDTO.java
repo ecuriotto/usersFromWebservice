@@ -2,39 +2,40 @@ package org.enrico.code.dto;
 
 import com.google.gson.annotations.SerializedName;
 
-public class UserDTO {
+public final class UserDTO {
 
-	private String id;
-    private String email;
+  private Long id;
+  private String email;
 
-    @SerializedName("first_name")
-    private String firstName;
+  @SerializedName("first_name")
+  private String firstName;
 
-	@SerializedName("last_name")
-    private String lastName;
+  @SerializedName("last_name")
+  private String lastName;
 
-    public String getFirstName() {
-        return firstName;
-    }
-    
-    public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+  public UserDTO() {}
 
-    public String getLastName() {
-        return lastName;
-    }
-    
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-    
-    public String getId() {
-		return id;
-	}
+  public UserDTO(String firstName, String lastName, Long id, String email) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.id = id;
+    this.email = email;
+  }
 
-	public String getEmail() {
-		return email;
-	}
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public String getEmail() {
+    return email;
+  }
 
 }
