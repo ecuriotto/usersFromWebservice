@@ -2,7 +2,7 @@ package org.enrico.code;
 
 import com.google.gson.annotations.SerializedName;
 
-public final class UserDTO {
+public class UserDTO {
 
   private Long id;
   private String email;

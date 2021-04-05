@@ -22,7 +22,6 @@ public class UserClient {
 
   private static final String REST_URI_PAGE_1 = "https://reqres.in/api/users?page=1;";
 
-
   /*
    * Execute getFirstPage method
    */

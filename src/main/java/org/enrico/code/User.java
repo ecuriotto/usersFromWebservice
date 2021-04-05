@@ -1,6 +1,6 @@
 package org.enrico.code;
 
-public final class User {
+public class User {
 
   private String firstName;
   private String lastName;
