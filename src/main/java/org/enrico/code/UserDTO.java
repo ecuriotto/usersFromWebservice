@@ -1,7 +1,10 @@
 package org.enrico.code;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDTO {
 
   private Long id;
@@ -22,10 +25,12 @@ public class UserDTO {
     this.email = email;
   }
 
+  @JsonProperty("first_name")
   public String getFirstName() {
     return firstName;
   }
 
+  @JsonProperty("last_name")
   public String getLastName() {
     return lastName;
   }

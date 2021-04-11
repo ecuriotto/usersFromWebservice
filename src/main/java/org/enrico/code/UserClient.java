@@ -18,7 +18,7 @@ import com.google.gson.Gson;
  * 
  * 
  */
-public class UserClient {
+public class UserClient extends UserClientAbstract {
 
   private static final String REST_URI_PAGE_1 = "https://reqres.in/api/users?page=1;";
 
@@ -53,11 +53,5 @@ public class UserClient {
     return userList;
   }
 
-  /*
-   * Converter UserDTO -> User
-   */
-  private User convertToUser(UserDTO userDTO) {
-    return new User(userDTO.getFirstName(), userDTO.getLastName());
-  }
 
 }
