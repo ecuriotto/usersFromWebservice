@@ -14,11 +14,6 @@ mvn test
 mvn exec:java -Dexec.mainClass="org.enrico.code.UserClient" -Dexec.cleanupDaemonThreads=false
 ```
 
-## Steps:
-mvn compile
-mvn test
-mvn exec:java -Dexec.mainClass="org.enrico.code.controller.UserClient" -Dexec.cleanupDaemonThreads=false
-
 ## Expected results
 ```
 George - Bluth
