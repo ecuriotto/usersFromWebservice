@@ -7,6 +7,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import com.google.gson.Gson;
 
@@ -30,6 +31,11 @@ public class UserClient extends UserClientAbstract {
     try {
       List<User> userList = userClient.getFirstPage();
       userList.forEach(user -> System.out.println(user));
+
+      // Additional tests
+      Map<String, Long> resultGroupBy = userList.stream()
+          .collect(Collectors.groupingBy(User::getFirstName, Collectors.counting()));
+      System.out.println(resultGroupBy);
     } catch (IOException | InterruptedException e) {
       e.printStackTrace();
     }
